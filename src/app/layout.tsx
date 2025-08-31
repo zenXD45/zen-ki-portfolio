@@ -2,8 +2,8 @@ import type { Metadata } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'My Portfolio',
-  description: 'A minimalist portfolio.',
+  title: 'Zenitsu Agatsuma - Developer Portfolio',
+  description: 'A personal portfolio showcasing the projects and skills of a passionate developer with shocking potential.',
 };
 
 export default function RootLayout({
@@ -13,12 +13,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark">
-      <head>
+       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
       </head>
-      <body className="font-mono antialiased">
+      <body className="font-sans antialiased">
         {children}
       </body>
     </html>
