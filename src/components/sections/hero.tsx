@@ -43,7 +43,6 @@ const imageVariants = {
     },
     hover: {
       scale: 1.05,
-      boxShadow: "0px 0px 30px hsl(var(--primary))",
       transition: { duration: 0.3 }
     }
   };
