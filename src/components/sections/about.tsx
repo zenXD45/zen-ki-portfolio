@@ -7,6 +7,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
 import { Sparkles, Zap } from 'lucide-react';
 import { Skeleton } from '../ui/skeleton';
+import { motion } from 'framer-motion';
 
 type AboutMeState = {
   summary: string;
@@ -41,8 +42,20 @@ export default function AboutSection() {
     }
   };
 
+  const sectionVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+  };
+
   return (
-    <section id="about" className="container mx-auto px-4 md:px-6 py-16 md:py-24">
+    <motion.section
+      id="about"
+      className="container mx-auto px-4 md:px-6 py-16 md:py-24"
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.2 }}
+      variants={sectionVariants}
+    >
       <div className="text-center space-y-4 mb-12">
         <h2 className="text-3xl md:text-4xl font-bold font-headline">
           About Me, but with a Spark!
@@ -116,6 +129,6 @@ export default function AboutSection() {
           </CardContent>
         </Card>
       </div>
-    </section>
+    </motion.section>
   );
 }

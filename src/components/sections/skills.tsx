@@ -1,5 +1,8 @@
+"use client";
+
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Code, Database, Smartphone, Cloud, PenTool, GitBranch } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 const skills = [
   { name: 'Frontend', description: 'React, Next.js, TypeScript', icon: <Code /> },
@@ -15,8 +18,25 @@ const LightningBoltIcon = () => (
 );
 
 export default function SkillsSection() {
+  const sectionVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0 },
+  };
+
   return (
-    <section id="skills" className="container mx-auto px-4 md:px-6 py-16 md:py-24 animate-fade-in-up">
+    <motion.section
+      id="skills"
+      className="container mx-auto px-4 md:px-6 py-16 md:py-24"
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.2 }}
+      variants={sectionVariants}
+    >
       <div className="text-center space-y-4 mb-12">
         <h2 className="text-3xl md:text-4xl font-bold font-headline">My Thunder Breathing Techniques</h2>
         <p className="max-w-2xl mx-auto text-muted-foreground">
@@ -24,25 +44,31 @@ export default function SkillsSection() {
         </p>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {skills.map((skill) => (
-          <Card key={skill.name} className="group transition-all duration-300 hover:shadow-lg hover:border-primary hover:-translate-y-1">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-3">
-                <div className="relative p-2 bg-secondary rounded-full">
-                  {skill.icon}
-                  <span className="absolute -top-1 -right-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                    <LightningBoltIcon />
-                  </span>
-                </div>
-                {skill.name}
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-muted-foreground">{skill.description}</p>
-            </CardContent>
-          </Card>
+        {skills.map((skill, index) => (
+          <motion.div
+            key={skill.name}
+            variants={itemVariants}
+            transition={{ duration: 0.5, delay: index * 0.1 }}
+          >
+            <Card className="group transition-all duration-300 hover:shadow-lg hover:border-primary hover:-translate-y-1">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-3">
+                  <div className="relative p-2 bg-secondary rounded-full">
+                    {skill.icon}
+                    <span className="absolute -top-1 -right-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                      <LightningBoltIcon />
+                    </span>
+                  </div>
+                  {skill.name}
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-muted-foreground">{skill.description}</p>
+              </CardContent>
+            </Card>
+          </motion.div>
         ))}
       </div>
-    </section>
+    </motion.section>
   );
 }
