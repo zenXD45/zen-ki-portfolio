@@ -16,7 +16,7 @@ const LightningBoltIcon = () => (
 
 export default function SkillsSection() {
   return (
-    <section id="skills" className="container mx-auto px-4 md:px-6 py-16 md:py-24">
+    <section id="skills" className="container mx-auto px-4 md:px-6 py-16 md:py-24 animate-fade-in-up">
       <div className="text-center space-y-4 mb-12">
         <h2 className="text-3xl md:text-4xl font-bold font-headline">My Thunder Breathing Techniques</h2>
         <p className="max-w-2xl mx-auto text-muted-foreground">

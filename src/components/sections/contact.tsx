@@ -23,7 +23,7 @@ export default function ContactSection() {
     };
 
   return (
-    <section id="contact" className="container mx-auto px-4 md:px-6 py-16 md:py-24">
+    <section id="contact" className="container mx-auto px-4 md:px-6 py-16 md:py-24 animate-fade-in">
       <div className="text-center space-y-4 mb-12">
         <h2 className="text-3xl md:text-4xl font-bold font-headline">Send a Signal</h2>
         <p className="max-w-2xl mx-auto text-muted-foreground">
@@ -31,7 +31,7 @@ export default function ContactSection() {
         </p>
       </div>
       <div className="grid md:grid-cols-2 gap-12 items-center">
-        <div>
+        <div className="animate-slide-in-from-left">
             <Card>
                 <CardHeader>
                     <CardTitle>Contact Form</CardTitle>
@@ -47,7 +47,7 @@ export default function ContactSection() {
                 </CardContent>
             </Card>
         </div>
-        <div className="space-y-6 text-center md:text-left">
+        <div className="space-y-6 text-center md:text-left animate-slide-in-from-right">
             <h3 className="text-2xl font-semibold">Or find me elsewhere</h3>
             <p className="text-muted-foreground">
                 Connect with me on social media. I'm usually lurking around, avoiding demons and shipping bugs.
