@@ -27,6 +27,7 @@ export function Header() {
       className={`sticky top-0 z-40 w-full transition-all duration-300 ${
         isScrolled ? 'bg-background/80 backdrop-blur-sm border-b' : 'bg-transparent'
       }`}
+      data-ai-hint="zenitsu anime"
     >
       <div className="container mx-auto flex h-16 items-center justify-between px-4 md:px-6">
         <Link href="#" className="flex items-center gap-2 font-bold text-xl">

@@ -6,17 +6,17 @@
   :root {
     --background: 224 71% 4%;
     --foreground: 210 40% 98%;
-    --card: 224 71% 10%;
+    --card: 224 71% 10% / 0.8;
     --card-foreground: 210 40% 98%;
     --popover: 224 71% 10%;
     --popover-foreground: 210 40% 98%;
     --primary: 45 100% 51%;
     --primary-foreground: 224 71% 4%;
-    --secondary: 217 33% 17%;
+    --secondary: 217 33% 17% / 0.8;
     --secondary-foreground: 210 40% 98%;
     --muted: 217 33% 17%;
     --muted-foreground: 215 20% 65%;
-    --accent: 217 33% 17%;
+    --accent: 217 33% 17% / 0.8;
     --accent-foreground: 210 40% 98%;
     --destructive: 0 63% 31%;
     --destructive-foreground: 210 40% 98%;
@@ -34,7 +34,26 @@
   body {
     @apply bg-background text-foreground;
     @apply transition-colors duration-500;
+    background-image: url('https://picsum.photos/1920/1080');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    position: relative;
   }
+
+  body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: hsl(var(--background) / 0.7);
+    backdrop-filter: blur(8px);
+    z-index: -1;
+  }
+
   .font-headline {
     font-family: 'Orbitron', sans-serif;
   }
