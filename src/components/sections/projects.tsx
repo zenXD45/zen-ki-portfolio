@@ -6,7 +6,7 @@ import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import Link from 'next/link';
-import { Github, ExternalLink } from 'lucide-react';
+import { Github, ExternalLink, Zap } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const projects = [
@@ -54,6 +54,18 @@ export default function ProjectsSection() {
     visible: { opacity: 1, y: 0, transition: { duration: 0.5, delay: 0.2 } },
   };
 
+  const cardVariants = {
+    hidden: { opacity: 0, scale: 0.8 },
+    visible: { opacity: 1, scale: 1, transition: { duration: 0.5 } },
+  };
+
+  const hoverEffect = {
+    scale: 1.05,
+    boxShadow: "0px 0px 20px hsl(var(--primary))",
+    transition: { duration: 0.3 }
+  };
+
+
   return (
     <motion.section
       id="projects"
@@ -79,11 +91,14 @@ export default function ProjectsSection() {
         <CarouselContent>
           {projects.map((project, index) => (
             <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
-              <div className="p-1 h-full">
-                <Card className="h-full flex flex-col">
+              <motion.div className="p-1 h-full" variants={cardVariants} whileHover={hoverEffect}>
+                <Card className="h-full flex flex-col group overflow-hidden">
                   <CardHeader>
                     <div className="aspect-video relative overflow-hidden rounded-lg mb-4">
-                        <Image src={project.image} alt={project.title} fill className="object-cover transition-transform duration-300 hover:scale-110" data-ai-hint={project.aiHint} />
+                        <Image src={project.image} alt={project.title} fill className="object-cover transition-transform duration-300 group-hover:scale-110" data-ai-hint={project.aiHint} />
+                        <div className="absolute inset-0 bg-black/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                          <Zap className="w-16 h-16 text-primary animate-lightning-strike" />
+                        </div>
                     </div>
                     <CardTitle>{project.title}</CardTitle>
                     <div className="flex flex-wrap gap-2 pt-2">
@@ -106,7 +121,7 @@ export default function ProjectsSection() {
                     </Button>
                   </CardFooter>
                 </Card>
-              </div>
+              </motion.div>
             </CarouselItem>
           ))}
         </CarouselContent>
