@@ -70,7 +70,7 @@ export default function ProjectsSection() {
   return (
     <motion.section
       id="projects"
-      className="container mx-auto px-4 md:px-6 flex flex-col justify-center h-full"
+      className="container mx-auto py-24 px-4 md:px-6"
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.2 }}

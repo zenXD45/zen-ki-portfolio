@@ -53,7 +53,7 @@ export default function HeroSection() {
   return (
     <motion.section
       id="home"
-      className="container mx-auto flex flex-col md:flex-row items-center gap-8 px-4 md:px-6 h-full"
+      className="container mx-auto flex min-h-screen flex-col md:flex-row items-center gap-8 px-4 md:px-6"
       variants={containerVariants}
       initial="hidden"
       animate="visible"

@@ -23,26 +23,14 @@ export default function Home() {
   }
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen bg-background">
       <Header />
       <main className="flex-1">
-        <div className="relative">
-          <div className="sticky-section">
-            <HeroSection />
-          </div>
-          <div className="sticky-section bg-background">
-            <AboutSection />
-          </div>
-          <div className="sticky-section bg-background">
-            <SkillsSection />
-          </div>
-          <div className="sticky-section bg-background">
-            <ProjectsSection />
-          </div>
-          <div className="sticky-section bg-background">
-            <ContactSection />
-          </div>
-        </div>
+        <HeroSection />
+        <AboutSection />
+        <SkillsSection />
+        <ProjectsSection />
+        <ContactSection />
       </main>
       <Toaster />
     </div>
