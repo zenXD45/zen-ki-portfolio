@@ -9,6 +9,7 @@ import ProjectsSection from "@/components/sections/projects";
 import ContactSection from "@/components/sections/contact";
 import { ZenitsuLoader } from "@/components/zenitsu-loader";
 import React from 'react';
+import { ParticleBackground } from "@/components/particle-background";
 
 export default function Home() {
   const [loading, setLoading] = React.useState(true);
@@ -24,8 +25,9 @@ export default function Home() {
 
   return (
     <div className="flex flex-col min-h-screen bg-background">
+      <ParticleBackground />
       <Header />
-      <main className="flex-1">
+      <main className="flex-1 relative z-10">
         <HeroSection />
         <AboutSection />
         <SkillsSection />

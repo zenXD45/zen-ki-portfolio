@@ -5,7 +5,8 @@ import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { MoveRight } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import React from 'react';
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -50,9 +51,18 @@ const imageVariants = {
 
 
 export default function HeroSection() {
+  const targetRef = React.useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: targetRef,
+    offset: ["start start", "end start"],
+  });
+
+  const imageTransform = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
+
   return (
     <motion.section
       id="home"
+      ref={targetRef}
       className="container mx-auto flex min-h-screen flex-col md:flex-row items-center gap-8 px-4 md:px-6"
       variants={containerVariants}
       initial="hidden"
@@ -90,16 +100,20 @@ export default function HeroSection() {
         variants={imageVariants}
         whileHover="hover"
       >
-        <div className="relative w-72 h-72 md:w-96 md:h-96 rounded-full overflow-hidden shadow-2xl border-4 border-primary/80">
+        <motion.div 
+          className="relative w-72 h-72 md:w-96 md:h-96 rounded-full overflow-hidden shadow-2xl border-4 border-primary/80"
+          style={{ y: imageTransform }}
+          >
           <Image
             src="https://i.pinimg.com/736x/9a/31/37/9a31378b1a533f07a974b6a93b48259d.jpg"
             alt="Zenitsu Portfolio Owner"
             fill
+            priority
             data-ai-hint="portrait anime"
             className="object-cover object-center w-full h-full"
           />
            <div className="absolute inset-0 bg-gradient-to-t from-background/50 to-transparent" />
-        </div>
+        </motion.div>
       </motion.div>
     </motion.section>
   );
