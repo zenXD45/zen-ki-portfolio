@@ -11,8 +11,8 @@ const sectionVariants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.1,
-      delayChildren: 0.2,
+      staggerChildren: 0.05,
+      delayChildren: 0.1,
     },
   },
 };
@@ -37,7 +37,7 @@ const wordVariants = {
 
 const imageVariants = {
     hidden: { opacity: 0, scale: 0.8, rotate: -5 },
-    visible: { opacity: 1, scale: 1, rotate: 0, transition: { type: 'spring', damping: 15, stiffness: 100, delay: 0.4 } },
+    visible: { opacity: 1, scale: 1, rotate: 0, transition: { type: 'spring', damping: 15, stiffness: 100, delay: 0.2 } },
 };
 
 const factItemVariants = {
