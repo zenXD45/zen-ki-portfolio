@@ -1,3 +1,4 @@
+
 "use client";
 
 import { Button } from "@/components/ui/button";
@@ -29,7 +30,7 @@ export default function ContactSection() {
   return (
     <motion.section
       id="contact"
-      className="container mx-auto px-4 md:px-6 py-16 md:py-24 flex flex-col justify-center h-full"
+      className="container mx-auto px-4 md:px-6 flex flex-col justify-center h-full"
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.2 }}
