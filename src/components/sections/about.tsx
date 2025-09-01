@@ -7,14 +7,44 @@ import { User, Zap, Coffee } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 
 const sectionVariants = {
-  hidden: { opacity: 0, y: 50 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5, staggerChildren: 0.2 } },
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.2,
+    },
+  },
 };
 
-const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+const titleVariants = {
+  hidden: { opacity: 0, y: -20 },
+  visible: { opacity: 1, y: 0, transition: { type: 'spring', stiffness: 100 } },
 };
+
+const wordVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      type: 'spring',
+      stiffness: 100,
+      damping: 10,
+    },
+  },
+};
+
+const imageVariants = {
+    hidden: { opacity: 0, scale: 0.8, rotate: -5 },
+    visible: { opacity: 1, scale: 1, rotate: 0, transition: { type: 'spring', damping: 15, stiffness: 100, delay: 0.4 } },
+};
+
+const factItemVariants = {
+  hidden: { opacity: 0, x: -50 },
+  visible: { opacity: 1, x: 0, transition: { type: 'spring', stiffness: 80 } },
+};
+
 
 const funFacts = [
     {
@@ -31,6 +61,13 @@ const funFacts = [
     },
 ];
 
+const aboutMeTitle = "About Me".split(" ");
+const aboutMeDescription = "A little more about the developer behind the code.".split(" ");
+const whoAmITitle = "Who Am I?".split(" ");
+const whoAmIDescription = "I'm a passionate developer who, much like Zenitsu, can appear a bit anxious on the surface—especially when a critical deadline looms like an approaching storm. However, when the pressure is on, I find my focus, channeling everything into creating clean, efficient, and impactful web experiences. My true potential is unlocked when I'm deep in the code, building something extraordinary.".split(" ");
+const funFactsTitle = "Fun Facts".split(" ");
+
+
 export default function AboutSection() {
   return (
     <motion.section
@@ -42,17 +79,25 @@ export default function AboutSection() {
       variants={sectionVariants}
     >
       <div className="text-center space-y-4 mb-12">
-        <motion.h2 variants={itemVariants} className="text-4xl md:text-5xl font-bold font-headline text-glow">
-          About Me
+        <motion.h2 variants={sectionVariants} className="text-4xl md:text-5xl font-bold font-headline text-glow">
+           {aboutMeTitle.map((word, index) => (
+            <motion.span key={index} variants={wordVariants} className="inline-block mr-4">
+              {word}
+            </motion.span>
+          ))}
         </motion.h2>
-        <motion.p variants={itemVariants} className="max-w-2xl mx-auto text-muted-foreground text-xl">
-          A little more about the developer behind the code.
+        <motion.p variants={sectionVariants} className="max-w-2xl mx-auto text-muted-foreground text-xl">
+           {aboutMeDescription.map((word, index) => (
+            <motion.span key={index} variants={wordVariants} className="inline-block mr-1.5">
+              {word}
+            </motion.span>
+          ))}
         </motion.p>
       </div>
       
       <div className="grid md:grid-cols-5 gap-12 items-center">
         <motion.div 
-            variants={itemVariants}
+            variants={imageVariants}
             className="md:col-span-2"
         >
             <div className="relative w-full aspect-square rounded-lg overflow-hidden shadow-2xl border-4 border-primary/80 group">
@@ -71,18 +116,34 @@ export default function AboutSection() {
             variants={sectionVariants}
             className="md:col-span-3 space-y-6"
         >
-          <motion.div variants={itemVariants}>
-            <h3 className="text-3xl font-bold font-headline text-primary mb-4">Who Am I?</h3>
-            <p className="text-muted-foreground text-lg leading-relaxed">
-              I'm a passionate developer who, much like Zenitsu, can appear a bit anxious on the surface—especially when a critical deadline looms like an approaching storm. However, when the pressure is on, I find my focus, channeling everything into creating clean, efficient, and impactful web experiences. My true potential is unlocked when I'm deep in the code, building something extraordinary.
-            </p>
+          <motion.div variants={sectionVariants}>
+            <motion.h3 variants={titleVariants} className="text-3xl font-bold font-headline text-primary mb-4">
+                {whoAmITitle.map((word, index) => (
+                    <motion.span key={index} variants={wordVariants} className="inline-block mr-1.5">
+                    {word}
+                    </motion.span>
+                ))}
+            </motion.h3>
+            <motion.p className="text-muted-foreground text-lg leading-relaxed" variants={sectionVariants}>
+                {whoAmIDescription.map((word, index) => (
+                    <motion.span key={index} variants={wordVariants} className="inline-block mr-1.5">
+                    {word}
+                    </motion.span>
+                ))}
+            </motion.p>
           </motion.div>
           
-          <motion.div variants={itemVariants}>
-             <h3 className="text-3xl font-bold font-headline text-primary mb-4">Fun Facts</h3>
-             <div className="space-y-4">
+          <motion.div variants={sectionVariants}>
+             <motion.h3 variants={titleVariants} className="text-3xl font-bold font-headline text-primary mb-4">
+                {funFactsTitle.map((word, index) => (
+                    <motion.span key={index} variants={wordVariants} className="inline-block mr-1.5">
+                        {word}
+                    </motion.span>
+                ))}
+             </motion.h3>
+             <motion.div className="space-y-4" variants={sectionVariants}>
                 {funFacts.map((fact, index) => (
-                    <motion.div key={index} variants={itemVariants}>
+                    <motion.div key={index} variants={factItemVariants}>
                         <Card className="bg-card/50 border-primary/30">
                             <CardContent className="p-4 flex items-center gap-4">
                                 <div className="p-2 bg-muted rounded-full">
@@ -93,7 +154,7 @@ export default function AboutSection() {
                         </Card>
                     </motion.div>
                 ))}
-             </div>
+             </motion.div>
           </motion.div>
         </motion.div>
       </div>
