@@ -16,8 +16,9 @@ export function ThunderCursor() {
     life: number;
     maxLife: number;
     opacity: number;
+    initialOpacity: number;
 
-    constructor(x: number, y: number) {
+    constructor(x: number, y: number, isOverText: boolean) {
       this.x = x;
       this.y = y;
       this.size = Math.random() * 5 + 2; // Increased size variation
@@ -27,7 +28,8 @@ export function ThunderCursor() {
       this.color = `hsl(${yellowHue}, 96%, 53%)`;
       this.life = 0;
       this.maxLife = Math.random() * 60 + 50; // Longer, more varied lifespan
-      this.opacity = 1;
+      this.initialOpacity = isOverText ? 0 : 1;
+      this.opacity = this.initialOpacity;
     }
 
     update() {
@@ -35,7 +37,7 @@ export function ThunderCursor() {
       this.y += this.speedY;
       
       const lifeRatio = this.life / this.maxLife;
-      this.opacity = 1 - lifeRatio;
+      this.opacity = this.initialOpacity * (1 - lifeRatio);
       this.size = this.size * (1 - 0.01);
 
       this.life++;
@@ -68,8 +70,10 @@ export function ThunderCursor() {
     setCanvasSize();
 
     const handleMouseMove = (e: MouseEvent) => {
+      const el = document.elementFromPoint(e.clientX, e.clientY);
+      const isText = el && ['P', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'SPAN', 'A', 'BUTTON', 'DIV', 'INPUT', 'TEXTAREA'].includes(el.tagName);
       for (let i = 0; i < 5; i++) { 
-        particles.current.push(new Particle(e.clientX, e.clientY));
+        particles.current.push(new Particle(e.clientX, e.clientY, !!isText));
       }
     };
     
