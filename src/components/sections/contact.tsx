@@ -14,8 +14,6 @@ export default function ContactSection() {
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        // In a real app, you'd handle form submission here.
-        // For this demo, we'll just show a success toast.
         toast({
             title: "Message Sent!",
             description: "Thanks for reaching out. I'll get back to you... maybe after a nap.",
@@ -38,42 +36,42 @@ export default function ContactSection() {
       variants={sectionVariants}
     >
       <div className="text-center space-y-4 mb-12">
-        <h2 className="text-3xl md:text-4xl font-bold font-headline">Send a Signal</h2>
-        <p className="max-w-2xl mx-auto text-muted-foreground">
-          Have a question or a mission for me? Don't be shy, send a message. I promise I won't scream... much.
+        <h2 className="text-4xl md:text-5xl font-bold font-headline text-glow">Contact Me</h2>
+        <p className="max-w-2xl mx-auto text-muted-foreground text-xl">
+          Have a question or a mission for me? Send a message.
         </p>
       </div>
       <div className="grid md:grid-cols-2 gap-12 items-center">
         <div>
-            <Card>
+            <Card className="border-primary/50">
                 <CardHeader>
-                    <CardTitle>Contact Form</CardTitle>
-                    <CardDescription>Fill out the form and I'll receive your message.</CardDescription>
+                    <CardTitle className="font-headline text-3xl">Contact Form</CardTitle>
+                    <CardDescription className="text-lg">Fill out the form to send a message.</CardDescription>
                 </CardHeader>
                 <CardContent>
                     <form onSubmit={handleSubmit} className="space-y-4">
-                        <Input placeholder="Your Name" name="name" required />
-                        <Input type="email" placeholder="Your Email" name="email" required />
-                        <Textarea placeholder="Your Message" name="message" rows={5} required />
-                        <Button type="submit" className="w-full bg-accent hover:bg-accent/90 text-accent-foreground">Send Message</Button>
+                        <Input placeholder="Your Name" name="name" required className="text-lg" />
+                        <Input type="email" placeholder="Your Email" name="email" required className="text-lg"/>
+                        <Textarea placeholder="Your Message" name="message" rows={5} required className="text-lg"/>
+                        <Button type="submit" className="w-full font-sans text-lg">Send Message</Button>
                     </form>
                 </CardContent>
             </Card>
         </div>
         <div className="space-y-6 text-center md:text-left">
-            <h3 className="text-2xl font-semibold">Or find me elsewhere</h3>
-            <p className="text-muted-foreground">
-                Connect with me on social media. I'm usually lurking around, avoiding demons and shipping bugs.
+            <h3 className="text-3xl font-semibold font-headline text-glow">Find Me Online</h3>
+            <p className="text-muted-foreground text-xl">
+                Connect with me on social media.
             </p>
             <div className="flex justify-center md:justify-start gap-6">
                 <Link href="#" target="_blank" className="text-muted-foreground hover:text-primary transition-colors">
-                    <Github className="w-8 h-8" />
+                    <Github className="w-10 h-10" />
                 </Link>
                 <Link href="#" target="_blank" className="text-muted-foreground hover:text-primary transition-colors">
-                    <Linkedin className="w-8 h-8" />
+                    <Linkedin className="w-10 h-10" />
                 </Link>
                 <Link href="#" target="_blank" className="text-muted-foreground hover:text-primary transition-colors">
-                    <Twitter className="w-8 h-8" />
+                    <Twitter className="w-10 h-10" />
                 </Link>
             </div>
         </div>

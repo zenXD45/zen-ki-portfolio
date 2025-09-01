@@ -17,8 +17,8 @@ export default {
     },
     extend: {
       fontFamily: {
-        sans: ['"Poppins"', 'sans-serif'],
-        headline: ['"Orbitron"', 'sans-serif'],
+        sans: ['"VT323"', 'monospace'],
+        headline: ['"Bungee"', 'cursive'],
       },
       colors: {
         border: "hsl(var(--border))",

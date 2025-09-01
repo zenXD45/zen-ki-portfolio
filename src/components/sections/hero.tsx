@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import { MoveRight, Zap } from 'lucide-react';
+import { MoveRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const containerVariants = {
@@ -57,30 +57,15 @@ export default function HeroSection() {
       initial="hidden"
       animate="visible"
     >
-        <motion.div 
-            className="absolute -top-1/4 -left-1/4 w-1/2 h-full text-primary/10 -z-1"
-            initial={{ x: -100, opacity: 0 }}
-            animate={{ x: 0, opacity: 1, transition: { duration: 1.5, delay: 1 } }}
-        >
-            <Zap className="w-full h-full animate-pulse" />
-        </motion.div>
-        <motion.div 
-            className="absolute -bottom-1/4 -right-1/4 w-1/2 h-full text-primary/10 -z-1"
-            initial={{ x: 100, opacity: 0 }}
-            animate={{ x: 0, opacity: 1, transition: { duration: 1.5, delay: 1.2 } }}
-        >
-            <Zap className="w-full h-full animate-pulse" />
-        </motion.div>
-
       <motion.div className="flex-1 space-y-6 text-center md:text-left" variants={containerVariants}>
         <motion.h1
-          className="text-4xl md:text-6xl font-extrabold tracking-tighter font-headline"
+          className="text-5xl md:text-7xl font-extrabold tracking-tighter font-headline text-glow"
           variants={itemVariants}
         >
           Zenitsu Agatsuma
         </motion.h1>
         <motion.p
-          className="max-w-xl mx-auto md:mx-0 text-lg text-muted-foreground"
+          className="max-w-xl mx-auto md:mx-0 text-xl text-muted-foreground"
           variants={itemVariants}
         >
           A passionate developer who might seem scared at first, but possesses shocking potential when it comes to building amazing web experiences.
@@ -89,12 +74,12 @@ export default function HeroSection() {
           className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start"
           variants={itemVariants}
         >
-          <Button asChild size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground">
+          <Button asChild size="lg" className="font-sans text-lg">
             <Link href="#projects">
               View My Work <MoveRight className="ml-2" />
             </Link>
           </Button>
-          <Button asChild size="lg" variant="outline">
+          <Button asChild size="lg" variant="outline" className="font-sans text-lg">
             <Link href="#contact">Get In Touch</Link>
           </Button>
         </motion.div>

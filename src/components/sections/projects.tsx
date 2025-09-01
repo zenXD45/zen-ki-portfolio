@@ -6,7 +6,7 @@ import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import Link from 'next/link';
-import { Github, ExternalLink, Zap } from 'lucide-react';
+import { Github, ExternalLink } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const projects = [
@@ -76,8 +76,8 @@ export default function ProjectsSection() {
       variants={sectionVariants}
     >
       <div className="text-center space-y-4 mb-12">
-        <h2 className="text-3xl md:text-4xl font-bold font-headline">My Missions (Projects)</h2>
-        <p className="max-w-2xl mx-auto text-muted-foreground">
+        <h2 className="text-4xl md:text-5xl font-bold font-headline text-glow">My Projects</h2>
+        <p className="max-w-2xl mx-auto text-muted-foreground text-xl">
           Each mission completed with precision and a little bit of panic.
         </p>
       </div>
@@ -92,29 +92,27 @@ export default function ProjectsSection() {
           {projects.map((project, index) => (
             <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
               <motion.div className="p-1 h-full" variants={cardVariants} whileHover={hoverEffect}>
-                <Card className="h-full flex flex-col group overflow-hidden">
+                <Card className="h-full flex flex-col group overflow-hidden bg-card border-primary/30">
                   <CardHeader>
                     <div className="aspect-video relative overflow-hidden rounded-lg mb-4">
                         <Image src={project.image} alt={project.title} fill className="object-cover transition-transform duration-300 group-hover:scale-110" data-ai-hint={project.aiHint} />
-                        <div className="absolute inset-0 bg-black/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                          <Zap className="w-16 h-16 text-primary animate-lightning-strike" />
-                        </div>
+                        <div className="absolute inset-0 bg-black/20" />
                     </div>
-                    <CardTitle>{project.title}</CardTitle>
+                    <CardTitle className="font-headline text-3xl text-primary">{project.title}</CardTitle>
                     <div className="flex flex-wrap gap-2 pt-2">
-                        {project.tags.map(tag => <Badge key={tag} variant="secondary">{tag}</Badge>)}
+                        {project.tags.map(tag => <Badge key={tag} variant="secondary" className="font-sans text-sm">{tag}</Badge>)}
                     </div>
                   </CardHeader>
                   <CardContent className="flex-grow">
-                    <p className="text-muted-foreground">{project.description}</p>
+                    <p className="text-muted-foreground text-lg">{project.description}</p>
                   </CardContent>
                   <CardFooter className="flex justify-start gap-4">
-                    <Button asChild>
+                    <Button asChild className="font-sans text-lg">
                         <Link href={project.liveUrl} target="_blank">
                             <ExternalLink className="mr-2 h-4 w-4" /> Live Demo
                         </Link>
                     </Button>
-                    <Button asChild variant="outline">
+                    <Button asChild variant="outline" className="font-sans text-lg">
                         <Link href={project.githubUrl} target="_blank">
                             <Github className="mr-2 h-4 w-4" /> Source
                         </Link>

@@ -13,10 +13,6 @@ const skills = [
   { name: 'Version Control', description: 'Git, GitHub', icon: <GitBranch /> },
 ];
 
-const LightningBoltIcon = () => (
-    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-primary"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg>
-);
-
 export default function SkillsSection() {
   const sectionVariants = {
     hidden: { opacity: 0, y: 50 },
@@ -38,9 +34,9 @@ export default function SkillsSection() {
       variants={sectionVariants}
     >
       <div className="text-center space-y-4 mb-12">
-        <h2 className="text-3xl md:text-4xl font-bold font-headline">My Thunder Breathing Techniques</h2>
-        <p className="max-w-2xl mx-auto text-muted-foreground">
-          Just like Zenitsu focuses on his First Form, I've honed these skills to perfection.
+        <h2 className="text-4xl md:text-5xl font-bold font-headline text-glow">My Skills</h2>
+        <p className="max-w-2xl mx-auto text-muted-foreground text-xl">
+          A collection of my technical capabilities and tools I use.
         </p>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -50,20 +46,15 @@ export default function SkillsSection() {
             variants={itemVariants}
             transition={{ duration: 0.5, delay: index * 0.1 }}
           >
-            <Card className="group transition-all duration-300 hover:shadow-lg hover:border-primary hover:-translate-y-1">
+            <Card className="group transition-all duration-300 hover:shadow-lg hover:border-primary hover:-translate-y-1 bg-card border-primary/30">
               <CardHeader>
-                <CardTitle className="flex items-center gap-3">
-                  <div className="relative p-2 bg-secondary rounded-full">
-                    {skill.icon}
-                    <span className="absolute -top-1 -right-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                      <LightningBoltIcon />
-                    </span>
-                  </div>
+                <CardTitle className="flex items-center gap-3 font-headline text-2xl text-primary">
+                  {skill.icon}
                   {skill.name}
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-muted-foreground">{skill.description}</p>
+                <p className="text-muted-foreground text-lg">{skill.description}</p>
               </CardContent>
             </Card>
           </motion.div>

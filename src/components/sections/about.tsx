@@ -57,30 +57,30 @@ export default function AboutSection() {
       variants={sectionVariants}
     >
       <div className="text-center space-y-4 mb-12">
-        <h2 className="text-3xl md:text-4xl font-bold font-headline">
-          About Me, but with a Spark!
+        <h2 className="text-4xl md:text-5xl font-bold font-headline text-glow">
+          About Me
         </h2>
-        <p className="max-w-2xl mx-auto text-muted-foreground">
-          Tell us about yourself, and let our AI assistant (powered by Zenitsu's lightning-fast thinking) whip up a unique summary and a fun fact for your profile.
+        <p className="max-w-2xl mx-auto text-muted-foreground text-xl">
+          Tell us about yourself, and let our AI assistant whip up a unique summary.
         </p>
       </div>
       
       <div className="grid md:grid-cols-2 gap-8 items-start">
-        <Card className="h-full">
+        <Card className="h-full border-primary/50">
           <CardHeader>
-            <CardTitle>Your Biography</CardTitle>
+            <CardTitle className="font-headline text-3xl">Your Biography</CardTitle>
           </CardHeader>
           <CardContent>
             <form onSubmit={handleSubmit} className="space-y-4">
               <Textarea
-                placeholder="Paste or write your bio here... e.g., 'I am a full-stack developer with 5 years of experience, specializing in React and Node.js. I love building scalable applications and I'm a big fan of anime...'"
+                placeholder="Paste or write your bio here..."
                 rows={10}
                 value={bio}
                 onChange={(e) => setBio(e.target.value)}
-                className="resize-none"
+                className="resize-none text-lg"
                 disabled={isLoading}
               />
-              <Button type="submit" disabled={isLoading || !bio.trim()} className="w-full">
+              <Button type="submit" disabled={isLoading || !bio.trim()} className="w-full font-sans text-lg">
                 {isLoading ? 'Generating...' : 'Generate with AI'}
                 <Sparkles className="ml-2 h-4 w-4" />
               </Button>
@@ -89,11 +89,11 @@ export default function AboutSection() {
           </CardContent>
         </Card>
 
-        <Card className="h-full bg-secondary">
+        <Card className="h-full bg-card border-secondary/50">
           <CardHeader>
-            <CardTitle>AI-Generated Profile</CardTitle>
+            <CardTitle className="font-headline text-3xl">AI-Generated Profile</CardTitle>
           </CardHeader>
-          <CardContent className="space-y-6 min-h-[250px]">
+          <CardContent className="space-y-6 min-h-[250px] text-lg">
             {isLoading && (
               <div className="space-y-4">
                 <Skeleton className="h-4 w-3/4" />
@@ -109,12 +109,12 @@ export default function AboutSection() {
             {!isLoading && result && (
               <>
                 <div>
-                  <h3 className="font-semibold mb-2">Summary</h3>
+                  <h3 className="font-semibold mb-2 font-headline text-secondary">Summary</h3>
                   <p className="text-muted-foreground">{result.summary}</p>
                 </div>
                 <div>
-                  <h3 className="font-semibold mb-2 flex items-center gap-2">
-                    <Zap className="text-primary" /> Zenitsu Fun Fact
+                  <h3 className="font-semibold mb-2 flex items-center gap-2 font-headline text-secondary">
+                    <Zap className="text-primary" /> Fun Fact
                   </h3>
                   <p className="text-muted-foreground italic">"{result.zenitsuFunFact}"</p>
                 </div>

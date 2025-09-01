@@ -25,21 +25,20 @@ export function Header() {
   return (
     <header
       className={`sticky top-0 z-40 w-full transition-all duration-300 ${
-        isScrolled ? 'bg-background/80 backdrop-blur-sm border-b' : 'bg-transparent'
+        isScrolled ? 'bg-background/80 backdrop-blur-sm border-b border-primary/20' : 'bg-transparent'
       }`}
-      data-ai-hint="zenitsu anime"
     >
-      <div className="container mx-auto flex h-16 items-center justify-between px-4 md:px-6">
-        <Link href="#" className="flex items-center gap-2 font-bold text-xl">
+      <div className="container mx-auto flex h-20 items-center justify-between px-4 md:px-6">
+        <Link href="#" className="flex items-center gap-2 font-bold text-2xl font-headline text-glow">
           <Bolt className="text-primary" />
           <span>Zenitsu</span>
         </Link>
-        <nav className="hidden md:flex items-center gap-6 text-sm font-medium">
+        <nav className="hidden md:flex items-center gap-6 text-lg font-medium">
           {navItems.map((item) => (
             <Link
               key={item.name}
               href={item.href}
-              className="text-foreground/80 transition-colors hover:text-primary"
+              className="text-foreground/80 transition-colors hover:text-primary hover:text-glow"
             >
               {item.name}
             </Link>
