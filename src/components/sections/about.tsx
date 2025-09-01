@@ -1,52 +1,36 @@
 "use client";
 
-import { useState } from 'react';
-import { generateAboutMeSection } from '@/ai/flows/generate-about-me-section';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Textarea } from '@/components/ui/textarea';
-import { Button } from '@/components/ui/button';
-import { Sparkles, Zap } from 'lucide-react';
-import { Skeleton } from '../ui/skeleton';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
+import { User, Zap, Coffee } from 'lucide-react';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
-type AboutMeState = {
-  summary: string;
-  zenitsuFunFact: string;
-} | null;
+const sectionVariants = {
+  hidden: { opacity: 0, y: 50 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5, staggerChildren: 0.2 } },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+};
+
+const funFacts = [
+    {
+      icon: <User className="text-primary" />,
+      text: "Publicly, a timid developer who's terrified of production bugs.",
+    },
+    {
+      icon: <Zap className="text-primary" />,
+      text: "Privately, enters a hyper-focused state to ship flawless code at lightning speed.",
+    },
+    {
+      icon: <Coffee className="text-primary" />,
+      text: "Fueled by green tea and the fear of breaking the build.",
+    },
+];
 
 export default function AboutSection() {
-  const [bio, setBio] = useState('');
-  const [result, setResult] = useState<AboutMeState>(null);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (!bio.trim()) {
-      setError("Please enter a bio first.");
-      return;
-    }
-    
-    setIsLoading(true);
-    setError(null);
-    setResult(null);
-
-    try {
-      const aiResult = await generateAboutMeSection({ bio });
-      setResult(aiResult);
-    } catch (err) {
-      setError("Failed to generate content. Please try again.");
-      console.error(err);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  const sectionVariants = {
-    hidden: { opacity: 0, y: 50 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
-  };
-
   return (
     <motion.section
       id="about"
@@ -57,77 +41,60 @@ export default function AboutSection() {
       variants={sectionVariants}
     >
       <div className="text-center space-y-4 mb-12">
-        <h2 className="text-4xl md:text-5xl font-bold font-headline text-glow">
+        <motion.h2 variants={itemVariants} className="text-4xl md:text-5xl font-bold font-headline text-glow">
           About Me
-        </h2>
-        <p className="max-w-2xl mx-auto text-muted-foreground text-xl">
-          Tell us about yourself, and let our AI assistant whip up a unique summary.
-        </p>
+        </motion.h2>
+        <motion.p variants={itemVariants} className="max-w-2xl mx-auto text-muted-foreground text-xl">
+          A little more about the developer behind the code.
+        </motion.p>
       </div>
       
-      <div className="grid md:grid-cols-2 gap-8 items-start">
-        <Card className="h-full border-primary/50">
-          <CardHeader>
-            <CardTitle className="font-headline text-3xl">Your Biography</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <Textarea
-                placeholder="Paste or write your bio here..."
-                rows={10}
-                value={bio}
-                onChange={(e) => setBio(e.target.value)}
-                className="resize-none text-lg"
-                disabled={isLoading}
-              />
-              <Button type="submit" disabled={isLoading || !bio.trim()} className="w-full font-sans text-lg">
-                {isLoading ? 'Generating...' : 'Generate with AI'}
-                <Sparkles className="ml-2 h-4 w-4" />
-              </Button>
-              {error && <p className="text-sm text-destructive">{error}</p>}
-            </form>
-          </CardContent>
-        </Card>
+      <div className="grid md:grid-cols-5 gap-12 items-center">
+        <motion.div 
+            variants={itemVariants}
+            className="md:col-span-2"
+        >
+            <div className="relative w-full aspect-square rounded-lg overflow-hidden shadow-2xl border-4 border-primary/80 group">
+                <Image
+                    src="https://i.pinimg.com/564x/e0/59/3a/e0593a027953b036573f4a47a7413a96.jpg"
+                    alt="Zenitsu contemplating code"
+                    fill
+                    data-ai-hint="anime character thinking"
+                    className="object-cover object-top transition-transform duration-500 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-background/70 to-transparent" />
+            </div>
+        </motion.div>
 
-        <Card className="h-full bg-card border-secondary/50">
-          <CardHeader>
-            <CardTitle className="font-headline text-3xl">AI-Generated Profile</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-6 min-h-[250px] text-lg">
-            {isLoading && (
-              <div className="space-y-4">
-                <Skeleton className="h-4 w-3/4" />
-                <Skeleton className="h-4 w-full" />
-                <Skeleton className="h-4 w-full" />
-                <div className="pt-4 space-y-2">
-                  <Skeleton className="h-4 w-1/2" />
-                  <Skeleton className="h-4 w-full" />
-                  <Skeleton className="h-4 w-5/6" />
-                </div>
-              </div>
-            )}
-            {!isLoading && result && (
-              <>
-                <div>
-                  <h3 className="font-semibold mb-2 font-headline text-secondary">Summary</h3>
-                  <p className="text-muted-foreground">{result.summary}</p>
-                </div>
-                <div>
-                  <h3 className="font-semibold mb-2 flex items-center gap-2 font-headline text-secondary">
-                    <Zap className="text-primary" /> Fun Fact
-                  </h3>
-                  <p className="text-muted-foreground italic">"{result.zenitsuFunFact}"</p>
-                </div>
-              </>
-            )}
-            {!isLoading && !result && (
-              <div className="flex flex-col items-center justify-center h-full text-center text-muted-foreground">
-                <Sparkles className="mx-auto h-12 w-12 text-muted-foreground/50 mb-4" />
-                Your generated content will appear here.
-              </div>
-            )}
-          </CardContent>
-        </Card>
+        <motion.div 
+            variants={sectionVariants}
+            className="md:col-span-3 space-y-6"
+        >
+          <motion.div variants={itemVariants}>
+            <h3 className="text-3xl font-bold font-headline text-primary mb-4">Who Am I?</h3>
+            <p className="text-muted-foreground text-lg leading-relaxed">
+              I'm a passionate developer who, much like Zenitsu, can appear a bit anxious on the surface—especially when a critical deadline looms like an approaching storm. However, when the pressure is on, I find my focus, channeling everything into creating clean, efficient, and impactful web experiences. My true potential is unlocked when I'm deep in the code, building something extraordinary.
+            </p>
+          </motion.div>
+          
+          <motion.div variants={itemVariants}>
+             <h3 className="text-3xl font-bold font-headline text-primary mb-4">Fun Facts</h3>
+             <div className="space-y-4">
+                {funFacts.map((fact, index) => (
+                    <motion.div key={index} variants={itemVariants}>
+                        <Card className="bg-card/50 border-primary/30">
+                            <CardContent className="p-4 flex items-center gap-4">
+                                <div className="p-2 bg-muted rounded-full">
+                                    {fact.icon}
+                                </div>
+                                <p className="text-lg text-muted-foreground">{fact.text}</p>
+                            </CardContent>
+                        </Card>
+                    </motion.div>
+                ))}
+             </div>
+          </motion.div>
+        </motion.div>
       </div>
     </motion.section>
   );
