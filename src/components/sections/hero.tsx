@@ -13,8 +13,21 @@ const containerVariants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.2,
+      staggerChildren: 0.1,
       delayChildren: 0.3,
+    },
+  },
+};
+
+const wordVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      type: 'spring',
+      stiffness: 100,
+      damping: 10,
     },
   },
 };
@@ -44,7 +57,6 @@ const imageVariants = {
       },
     },
     hover: {
-      scale: 1.05,
       transition: { duration: 0.3 }
     }
   };
@@ -59,6 +71,9 @@ export default function HeroSection() {
 
   const imageTransform = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
 
+  const heroTitle = "Zenitsu Agatsuma".split(" ");
+  const heroDescription = "A passionate developer who might seem scared at first, but possesses shocking potential when it comes to building amazing web experiences.".split(" ");
+
   return (
     <motion.section
       id="home"
@@ -71,15 +86,27 @@ export default function HeroSection() {
       <motion.div className="flex-1 space-y-6 text-center md:text-left" variants={containerVariants}>
         <motion.h1
           className="text-5xl md:text-7xl font-extrabold tracking-tighter font-headline text-glow"
-          variants={itemVariants}
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
         >
-          Zenitsu Agatsuma
+          {heroTitle.map((word, index) => (
+            <motion.span key={index} variants={wordVariants} className="inline-block mr-4">
+              {word}
+            </motion.span>
+          ))}
         </motion.h1>
         <motion.p
           className="max-w-xl mx-auto md:mx-0 text-xl text-muted-foreground"
-          variants={itemVariants}
+           variants={containerVariants}
+          initial="hidden"
+          animate="visible"
         >
-          A passionate developer who might seem scared at first, but possesses shocking potential when it comes to building amazing web experiences.
+           {heroDescription.map((word, index) => (
+            <motion.span key={index} variants={wordVariants} className="inline-block mr-1.5">
+              {word}
+            </motion.span>
+          ))}
         </motion.p>
         <motion.div
           className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start"
