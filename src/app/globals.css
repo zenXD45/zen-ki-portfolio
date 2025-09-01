@@ -69,4 +69,8 @@
   .text-glow {
     text-shadow: 0 0 8px hsl(var(--primary) / 0.8), 0 0 20px hsl(var(--primary) / 0.4);
   }
+
+  .sticky-section {
+      @apply sticky top-0 w-full h-screen;
+  }
 }

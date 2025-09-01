@@ -52,7 +52,7 @@ export default function HeroSection() {
   return (
     <motion.section
       id="home"
-      className="relative container mx-auto flex flex-col md:flex-row items-center gap-8 px-4 md:px-6 py-20 md:py-32 overflow-hidden"
+      className="relative container mx-auto flex flex-col md:flex-row items-center gap-8 px-4 md:px-6 py-20 md:py-32 overflow-hidden h-full"
       variants={containerVariants}
       initial="hidden"
       animate="visible"

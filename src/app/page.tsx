@@ -26,11 +26,23 @@ export default function Home() {
     <div className="flex flex-col min-h-screen">
       <Header />
       <main className="flex-1">
-        <HeroSection />
-        <AboutSection />
-        <SkillsSection />
-        <ProjectsSection />
-        <ContactSection />
+        <div className="relative">
+          <div className="sticky-section">
+            <HeroSection />
+          </div>
+          <div className="sticky-section bg-background">
+            <AboutSection />
+          </div>
+          <div className="sticky-section bg-background">
+            <SkillsSection />
+          </div>
+          <div className="sticky-section bg-background">
+            <ProjectsSection />
+          </div>
+          <div className="sticky-section bg-background">
+            <ContactSection />
+          </div>
+        </div>
       </main>
       <Toaster />
     </div>
