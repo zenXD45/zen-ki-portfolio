@@ -4,7 +4,6 @@ import React, { useRef, useEffect } from 'react';
 
 export function ThunderCursor() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const mousePosition = useRef({ x: -100, y: -100 });
   const particles = useRef<Particle[]>([]);
 
   class Particle {
@@ -16,40 +15,40 @@ export function ThunderCursor() {
     color: string;
     life: number;
     maxLife: number;
+    opacity: number;
 
     constructor(x: number, y: number) {
       this.x = x;
       this.y = y;
-      this.size = Math.random() * 4 + 1;
-      this.speedX = Math.random() * 2 - 1;
-      this.speedY = Math.random() * 2 - 1;
+      this.size = Math.random() * 5 + 2; // Increased size variation
+      this.speedX = Math.random() * 3 - 1.5; // Wider speed range
+      this.speedY = Math.random() * 3 - 1.5; // Wider speed range
       const yellowHue = 48;
-      this.color = `hsla(${yellowHue}, 96%, 53%, 1)`;
+      this.color = `hsl(${yellowHue}, 96%, 53%)`;
       this.life = 0;
-      this.maxLife = Math.random() * 60 + 40;
+      this.maxLife = Math.random() * 60 + 50; // Longer, more varied lifespan
+      this.opacity = 1;
     }
 
     update() {
       this.x += this.speedX;
       this.y += this.speedY;
+      
+      const lifeRatio = this.life / this.maxLife;
+      this.opacity = 1 - lifeRatio;
+      this.size = this.size * (1 - 0.01);
+
       this.life++;
-      if (this.life < this.maxLife) {
-        this.size -= 0.05;
-      }
-      if (this.size < 0) {
-        this.size = 0;
-      }
     }
 
     draw(ctx: CanvasRenderingContext2D) {
-      if (this.size > 0) {
+      if (this.size > 0.1 && this.opacity > 0) {
+        ctx.globalAlpha = this.opacity;
         ctx.beginPath();
-        const opacity = 1 - this.life / this.maxLife;
-        const yellowHue = 48;
-        this.color = `hsla(${yellowHue}, 96%, 53%, ${opacity})`;
         ctx.fillStyle = this.color;
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
         ctx.fill();
+        ctx.globalAlpha = 1; 
       }
     }
   }
@@ -69,8 +68,7 @@ export function ThunderCursor() {
     setCanvasSize();
 
     const handleMouseMove = (e: MouseEvent) => {
-      mousePosition.current = { x: e.clientX, y: e.clientY };
-      for (let i = 0; i < 2; i++) {
+      for (let i = 0; i < 5; i++) { 
         particles.current.push(new Particle(e.clientX, e.clientY));
       }
     };
@@ -82,7 +80,7 @@ export function ThunderCursor() {
         const p = particles.current[i];
         p.update();
         p.draw(ctx);
-        if (p.life >= p.maxLife || p.size <= 0) {
+        if (p.life >= p.maxLife || p.size <= 0.1 || p.opacity <= 0) {
           particles.current.splice(i, 1);
         }
       }
