@@ -2,6 +2,44 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+  .section-wrapper {
+    @apply relative overflow-hidden py-24 md:py-32;
+  }
+  
+  .section-bg {
+    @apply absolute inset-0 -z-10;
+  }
+  
+  .section-bg::before {
+    content: "";
+    @apply absolute inset-0 opacity-20 transition-all duration-500 ease-out;
+  }
+  
+  .bg-primary-gradient::before {
+    @apply bg-gradient-to-br from-primary/30 to-transparent;
+    backdrop-filter: blur(10px);
+  }
+  
+  .bg-secondary-gradient::before {
+    @apply bg-gradient-to-br from-secondary/30 to-transparent;
+    backdrop-filter: blur(10px);
+  }
+  
+  .bg-accent-gradient::before {
+    @apply bg-gradient-to-br from-accent/30 to-transparent;
+    backdrop-filter: blur(10px);
+  }
+  
+  .pulse-glow {
+    @keyframes pulse {
+      0% { opacity: 0.4; }
+      50% { opacity: 1; }
+      100% { opacity: 0.4; }
+    }
+    animation: pulse 2s infinite;
+  }
+}
 @layer base {
   :root {
     --background: 240 10% 4%;

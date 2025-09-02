@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { User, Zap, Coffee } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 
+
 const sectionVariants = {
   hidden: { opacity: 0 },
   visible: {
@@ -46,6 +47,7 @@ const factItemVariants = {
 };
 
 
+
 const funFacts = [
     {
       icon: <User className="text-primary" />,
@@ -70,6 +72,9 @@ const funFactsTitle = "Fun Facts".split(" ");
 
 export default function AboutSection() {
   return (
+
+     
+
     <motion.section
       id="about"
       className="container mx-auto py-24 px-4 md:px-6"
@@ -78,6 +83,7 @@ export default function AboutSection() {
       viewport={{ once: true, amount: 0.2 }}
       variants={sectionVariants}
     >
+        
       <div className="text-center space-y-4 mb-12">
         <motion.h2 variants={sectionVariants} className="text-4xl md:text-5xl font-bold font-headline text-glow">
            {aboutMeTitle.map((word, index) => (
@@ -133,29 +139,7 @@ export default function AboutSection() {
             </motion.p>
           </motion.div>
           
-          <motion.div variants={sectionVariants}>
-             <motion.h3 variants={titleVariants} className="text-3xl font-bold font-headline text-primary mb-4">
-                {funFactsTitle.map((word, index) => (
-                    <motion.span key={index} variants={wordVariants} className="inline-block mr-1.5">
-                        {word}
-                    </motion.span>
-                ))}
-             </motion.h3>
-             <motion.div className="space-y-4" variants={sectionVariants}>
-                {funFacts.map((fact, index) => (
-                    <motion.div key={index} variants={factItemVariants}>
-                        <Card className="bg-card/50 border-primary/30">
-                            <CardContent className="p-4 flex items-center gap-4">
-                                <div className="p-2 bg-muted rounded-full">
-                                    {fact.icon}
-                                </div>
-                                <p className="text-lg text-muted-foreground">{fact.text}</p>
-                            </CardContent>
-                        </Card>
-                    </motion.div>
-                ))}
-             </motion.div>
-          </motion.div>
+
         </motion.div>
       </div>
     </motion.section>
