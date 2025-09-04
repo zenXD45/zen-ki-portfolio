@@ -5,11 +5,13 @@ import { Header } from "@/components/header";
 import HeroSection from "@/components/sections/hero";
 import AboutSection from "@/components/sections/about";
 import SkillsSection from "@/components/sections/skills";
-import ProjectsSection from "@/components/sections/projects";
+
 import ContactSection from "@/components/sections/contact";
 import { ZenitsuLoader } from "@/components/zenitsu-loader";
 import React from 'react';
 import { ParticleBackground } from "@/components/particle-background";
+import SplashCursorDemo from "@/components/cursor-animation"
+import ProjectShowCaseDemo from "@/components/ui/project-showcase"
 
 export default function Home() {
   const [loading, setLoading] = React.useState(true);
@@ -29,9 +31,10 @@ export default function Home() {
       <Header />
       <main className="flex-1 relative z-10">
         <HeroSection />
-        <AboutSection />
+        <AboutSection />\
+        <SplashCursorDemo/>
         <SkillsSection />
-        <ProjectsSection />
+        <ProjectShowCaseDemo />
         <ContactSection />
       </main>
       <Toaster />
