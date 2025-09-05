@@ -1,19 +1,18 @@
-"use client"
+interface LoaderProps {
+  onVideoEnded: () => void;
+  fadeOut: boolean;
+}
 
-export function ZenitsuLoader() {
+export default function Loader({ onVideoEnded, fadeOut }: LoaderProps) {
   return (
-    <div className=" flex items-center justify-center bg-background w-screen h-screen">
-      <div className="relative w-full h-full md:w-[50vw] md:h-[50vh] overflow-hidden">
-        <video
-          src="./videos/loader.mp4"
-          
-          autoPlay  
-          loop
-          muted
-         
-          className="w-full h-full object-cover"
-        />
-      </div>
-    </div>
+    <video
+      src="/videos/zen.mp4"
+      autoPlay
+      muted
+      className={`w-full h-full object-cover transition-opacity duration-800 ${
+        fadeOut ? "opacity-0" : "opacity-100"
+      }`}
+      onEnded={onVideoEnded}
+    />
   );
 }
