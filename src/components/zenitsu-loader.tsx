@@ -7,7 +7,7 @@ export function ZenitsuLoader() {
         <video
           src="./videos/loader.mp4"
           
-          autoPlay
+          autoPlay  
           loop
           muted
          

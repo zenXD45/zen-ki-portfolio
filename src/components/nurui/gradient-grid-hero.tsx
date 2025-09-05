@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react"
 import { motion } from "framer-motion"
+import Image from 'next/image';
 
 export function GradientGridHero() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
@@ -178,11 +179,12 @@ export function GradientGridHero() {
 
   return (
     <motion.div
-      className="w-full h-[400px] md:h-[500px] relative"
+      className="w-full h-[400px] md:h-[500px] relative z-10"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 1 }}
     >
+     
       <canvas ref={canvasRef} className="w-full h-full" style={{ display: "block" }} />
     </motion.div>
   )

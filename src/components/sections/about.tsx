@@ -7,6 +7,7 @@ import { User, Zap, Coffee } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 
 
+
 const sectionVariants = {
   hidden: { opacity: 0 },
   visible: {
@@ -106,14 +107,14 @@ export default function AboutSection() {
             variants={imageVariants}
             className="md:col-span-2"
         >
-            <div className="relative w-full aspect-square rounded-lg overflow-hidden shadow-2xl border-4 border-primary/80 group">
-                <Image
-                    src="https://i.pinimg.com/564x/e0/59/3a/e0593a027953b036573f4a47a7413a96.jpg"
-                    alt="Zenitsu contemplating code"
-                    fill
-                    data-ai-hint="anime character thinking"
-                    className="object-cover object-top transition-transform duration-500 group-hover:scale-110"
-                />
+            <div className="relative w-full aspect-square rounded-full overflow-hidden shadow-2xl border-4 border-primary/80 group">
+               <Image
+  src="/images/zen.png"
+  alt="Zenitsu contemplating"
+  fill
+  className="object-cover object-top transition-transform duration-500 group-hover:scale-110"
+/>
+
                 <div className="absolute inset-0 bg-gradient-to-t from-background/70 to-transparent" />
             </div>
         </motion.div>
@@ -130,7 +131,7 @@ export default function AboutSection() {
                     </motion.span>
                 ))}
             </motion.h3>
-            <motion.p className="text-muted-foreground text-lg leading-relaxed" variants={sectionVariants}>
+            <motion.p className="text-muted-foreground text-2xl leading-relaxed" variants={sectionVariants}>
                 {whoAmIDescription.map((word, index) => (
                     <motion.span key={index} variants={wordVariants} className="inline-block mr-1.5">
                     {word}
