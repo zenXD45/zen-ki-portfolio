@@ -13,49 +13,21 @@ import { ParticleBackground } from "@/components/particle-background";
 import SplashCursorDemo from "@/components/cursor-animation"
 import ProjectShowCaseDemo from "@/components/ui/project-showcase"
 import Image from 'next/image'
-import { useState , useEffect} from "react";
+import { useState } from "react";
 
 export default function Home() {
-    const [loading, setLoading] = useState(true);
-  const [fadeOutLoader, setFadeOutLoader] = useState(false);
+   const [loading, setLoading] = useState(true);
 
-  // Called by loader after video end
-  const handleVideoEnded = () => {
-    setFadeOutLoader(true); // start fade-out animation for loader
-  };
-
-  // After fade-out duration, hide loader completely
-  useEffect(() => {
-    if (fadeOutLoader) {
-      const timer = setTimeout(() => {
-        setLoading(false);
-      }, 800); // duration matches CSS fade time
-      return () => clearTimeout(timer);
-    }
-  }, [fadeOutLoader]);
+ 
 
   return (
-    <div className="relative min-h-screen">
-      {/* Loader video always rendered while loading */}
-      {loading && (
-        <div
-          className={`fixed inset-0 z-50 bg-black transition-opacity duration-800 ${
-            fadeOutLoader ? "opacity-0" : "opacity-100"
-          }`}
-          style={{ pointerEvents: fadeOutLoader ? "none" : "auto" }}
-        >
-          <Loader onVideoEnded={handleVideoEnded} fadeOut={fadeOutLoader} />
-        </div>
-      )}
+    <div className="flex flex-col min-h-screen bg-background">
+       {loading && <Loader onFinish={() => setLoading(false)} />}
 
-      {/* Site content beneath loader, fades in when loader fades out */}
-      <main
-        className={`transition-opacity duration-800 ${
-          fadeOutLoader ? "opacity-100" : "opacity-0"
-        }`}
-      >
-        {/* Your full site content */}
-        <ParticleBackground />
+ {!loading && (
+        <main>
+         
+      <ParticleBackground />
       <Header />
       <main className="flex-1 relative z-10">
          <Image
@@ -73,8 +45,9 @@ export default function Home() {
         <ContactSection />
       </main>
       <Toaster />
-      </main>
+        </main>
+      )}
+
     </div>
   );
 }
-
